@@ -25,6 +25,34 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+function updateMenu(choice) {
+  switch (choice) {
+    case '1':
+      options.includeSymbols = !options.includeSymbols;
+      break;
+    case '2':
+      options.includeNumbers = !options.includeNumbers;
+      break;
+    case '3':
+      options.includeLowercase = !options.includeLowercase;
+      break;
+    case '4':
+      options.includeUppercase = !options.includeUppercase;
+      break;
+    default:
+      console.log("Invalid choice. Please enter a valid number (1-4).");
+      break;
+  }
+  displayMenu();
+  rl.question("Enter your choice (1-4) or press 'q' to quit: ", (input) => {
+    if (input.toLowerCase() === 'q') {
+      console.log("Exiting the password generator.");
+      rl.close();
+    } else {
+      updateMenu(input);
+    }
+  });
+}
 
 //display menu at the start and get users choice
 displayMenu();
