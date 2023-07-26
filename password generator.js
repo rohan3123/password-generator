@@ -1,14 +1,21 @@
 "use strict";
 
-function main() {
-  console.log("Hello, World! This is a password generator.");
+const readline = require('readline');
 
-  let choice = 0;
+console.log("Hello, World! This is a password generator.");
 
-  console.log("1. [ ] Include Symbols");
-  console.log("2. [ ] Include Numbers");
-  console.log("3. [ ] Include Lowercase Characters");
-  console.log("4. [ ] Include Uppercase Characters");
+let options = {
+  includeSymbols: false,
+  includeNumbers: false,
+  includeLowercase: false,
+  includeUppercase: false
+};
+
+function displayMenu() {
+  console.log(`1. [${options.includeSymbols ? 'X' : ' '}] Include Symbols`);
+  console.log(`2. [${options.includeNumbers ? 'X' : ' '}] Include Numbers`);
+  console.log(`3. [${options.includeLowercase ? 'X' : ' '}] Include Lowercase Characters`);
+  console.log(`4. [${options.includeUppercase ? 'X' : ' '}] Include Uppercase Characters`);
 }
 
-main();
+displayMenu();
