@@ -1,66 +1,37 @@
 "use strict";
 
-const readline = require('readline');
+//list of all possible strings 
+const symbols = "!@#$%^&*()_-+=[]{}|;:,.<>?";
+const numbers = "0123456789";
+const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-console.log("Hello, World! This is a password generator.");
+const possibleChar = [symbols, numbers, lowercaseLetters, uppercaseLetters];
 
-let options = {
-  includeSymbols: false,
-  includeNumbers: false,
-  includeLowercase: false,
-  includeUppercase: false
-};
+//the Password Generation Function
+function Password(length)
+{
+  let password = "";  
 
-//display menu 
-function displayMenu() {
-  console.log(`1. [${options.includeSymbols ? 'X' : ' '}] Include Symbols`);
-  console.log(`2. [${options.includeNumbers ? 'X' : ' '}] Include Numbers`);
-  console.log(`3. [${options.includeLowercase ? 'X' : ' '}] Include Lowercase Characters`);
-  console.log(`4. [${options.includeUppercase ? 'X' : ' '}] Include Uppercase Characters`);
+  //for loop to generate a random string based on the arrays 
+  for(let i = 0; i < length; i++ )
+  {
+    const randomCharacterSet = possibleCharacters[Math.floor(Math.random() * possibleCharacters.length)];
+    const randomCharacter = randomCharacterSet[Math.floor(Math.random() * randomCharacterSet.length)];
+    password += randomCharacter;
+  }
+
+  return password; 
+   
 }
 
+function main()
+{
+  // You can change the desired length of the password
+  const passwordLength = 12; 
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-function updateMenu(choice) {
-  switch (choice) {
-    case '1':
-      options.includeSymbols = !options.includeSymbols;
-      break;
-    case '2':
-      options.includeNumbers = !options.includeNumbers;
-      break;
-    case '3':
-      options.includeLowercase = !options.includeLowercase;
-      break;
-    case '4':
-      options.includeUppercase = !options.includeUppercase;
-      break;
-    default:
-      console.log("Invalid choice. Please enter a valid number (1-4).");
-      break;
-  }
-  displayMenu();
-  rl.question("Enter your choice (1-4) or press 'q' to quit: ", (input) => {
-    if (input.toLowerCase() === 'q') {
-      console.log("Exiting the password generator.");
-      rl.close();
-    } else {
-      updateMenu(input);
-    }
-  });
+  const generatedPassword = generatePassword(passwordLength);
+  console.log("Generated Password:", generatedPassword);
 }
 
-//display menu at the start and get users choice
-displayMenu();
-rl.question("Enter your choice (1-4) or press 'q' to quit: ", (input) => {
-  if (input.toLowerCase() === 'q') {
-    console.log("Exiting the password generator.");
-    rl.close();
-  } else {
-    updateMenu(input);
-  }
-});
+main()
